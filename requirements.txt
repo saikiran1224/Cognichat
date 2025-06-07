@@ -1,0 +1,15 @@
+langchain
+pymongo
+nest-asyncio
+
+langchain[google-genai] # LLM
+langchain-ollama # Embedding model used from Ollama
+langchain-mongodb # MongoDB vector store
+
+langchain-text-splitters
+langchain-community
+langgraph
+
+python-dotenv
+streamlit
+bs4

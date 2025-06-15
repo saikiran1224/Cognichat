@@ -21,8 +21,8 @@ print("LLM (Gemini 2.0 Flash) initialized.")
 
 # Initialize Ollama Embeddings (ensure Ollama server is running with llama3.2)
 # IMPORTANT: This must be the SAME embedding model used during ingestion.
-embeddings = OllamaEmbeddings(model="llama3.2")
-print("Ollama Embeddings (llama3.2) initialized.")
+embeddings = OllamaEmbeddings(model="nomic-embed-text:latest")
+print("Ollama Embeddings (nomic-embed-text) initialized.")
 
 # MongoDB Connection details (must match ingestion.py)
 

@@ -41,7 +41,7 @@ vector_store = MongoDBAtlasVectorSearch(
 
 print(f"Attempting to create vector search index: {config.ATLAS_VECTOR_SEARCH_INDEX_NAME}...")
 
-# As LLama 3.2 embeddings are 3072 dimensions, we need to ensure the index is created with the correct dimensions so there will be no error during search operation.
+# As nomic-embedding-text model embeddings are of 768 dimensions, we need to ensure the index is created with the correct dimensions so there will be no error during search operation.
 try:
     vector_store.create_vector_search_index(dimensions=768)
     print("Vector search index created successfully (or already exists).")
@@ -65,33 +65,33 @@ docs = website_loader.load()
 print(f"Loaded {len(docs)} documents.")
 
 # Case 2: Loading from Local Files 
-# markdown_loader = DirectoryLoader(
-#         "data/website_data",
-#         glob="**/*.md",
-#         show_progress=True,
-#         recursive=True,
-#         loader_cls=UnstructuredMarkdownLoader,
-# )
+markdown_loader = DirectoryLoader(
+        "data/website_data",
+        glob="**/*.md",
+        show_progress=True,
+        recursive=True,
+        loader_cls=UnstructuredMarkdownLoader,
+)
 
-# # Load documents from PDF, PPT, Excel, and Word files
-# pdf_loader = UnstructuredPDFLoader("data/documents/*.pdf")
-# ppt_loader = UnstructuredPowerPointLoader("data/documents/*.pptx")
-# excel_loader = UnstructuredExcelLoader("data/documents/*.xlsx")
-# word_loader = UnstructuredWordDocumentLoader("data/documents/*.docx")
+# Load documents from PDF, PPT, Excel, and Word files
+pdf_loader = UnstructuredPDFLoader("data/documents/*.pdf")
+ppt_loader = UnstructuredPowerPointLoader("data/documents/*.pptx")
+excel_loader = UnstructuredExcelLoader("data/documents/*.xlsx")
+word_loader = UnstructuredWordDocumentLoader("data/documents/*.docx")
 
-# # Load documents from each type
-# pdf_docs = pdf_loader.load()
-# ppt_docs = ppt_loader.load()
-# excel_docs = excel_loader.load()
-# word_docs = word_loader.load()
+# Load documents from each type
+pdf_docs = pdf_loader.load()
+ppt_docs = ppt_loader.load()
+excel_docs = excel_loader.load()
+word_docs = word_loader.load()
 
-# # Combine all loaded documents
-# docs.extend(pdf_docs)
-# docs.extend(ppt_docs)
-# docs.extend(excel_docs)
-# docs.extend(word_docs)
+# Combine all loaded documents
+docs.extend(pdf_docs)
+docs.extend(ppt_docs)
+docs.extend(excel_docs)
+docs.extend(word_docs)
 
-# print(f"Loaded {len(pdf_docs)} PDF documents, {len(ppt_docs)} PPT documents, {len(excel_docs)} Excel documents, and {len(word_docs)} Word documents.")
+print(f"Loaded {len(pdf_docs)} PDF documents, {len(ppt_docs)} PPT documents, {len(excel_docs)} Excel documents, and {len(word_docs)} Word documents.")
 
 print("Splitting documents into chunks...")
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=50)
